@@ -1,0 +1,1 @@
+Try to run the commands in run.sh file manually to test the output. For some reason, after changing the values runnng .sh file doesnt change to new values even after compiling or may not even compile sometimes :P 
