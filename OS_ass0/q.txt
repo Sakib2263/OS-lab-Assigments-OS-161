@@ -1,0 +1,27 @@
+Question 1. What is the vm system called that is configured for assignment 0? 
+Question 2. Which register number is used for the stack pointer (sp) in OS/161? 
+Question 3. What bus/busses does OS/161 support? 
+Question 4. What is the difference between splhigh and spl0? 
+Question 5. Why do we use typedefs like u_int32_t instead of simply saying "int"? 
+Question 6. What must be the first thing in the process control block? 
+Question 7. What does splx return? 
+Question 8. What is the highest interrupt level? 
+Question 9. What function is called when user-level code generates a fatal fault? 
+Question 10. How frequently are hardclock interrupts generated? 
+Question 11. What functions comprise the standard interface to a VFS device? 
+Question 12. How many characters are allowed in a volume name? 
+Question 13. How many direct blocks does an SFS file have? 
+Question 14. What is the standard interface to a file system (i.e., what functions must you 
+Question 15. What function puts a thread to sleep? 
+Question 16. How large are OS/161 pids? 
+Question 17. What operations can you do on a vnode? 
+Question 18. What is the maximum path length in OS/161? 
+Question 19. What is the system call number for a reboot? 
+Question 20. Where is STDIN_FILENO defined? 
+Question 21. What does kmain() do? 
+Question 22. Is it OK to initialise the thread system before the scheduler? Why (not)?
+Question 23. What is a zombie? Question 24. How large is the initial run queue?
+Question 25. What does a device name in OS/161 look like?
+Question 26. What does a raw device name in OS/161 look like?
+Question 27. What lock protects the vnode reference count?
+Question 28. What device types are currently supported? 

@@ -1,0 +1,117 @@
+CSE3211: Operating System Assignment 0
+Sakib Hasan
+Roll : 149
+1 Introduction
+
+ Question 1: What is the vm system called that is configured for assignment 0?
+Ans: DUMBVM -/os161-ASST0/kern/arch/mips/conf/conf.arch
+
+Question 2. Which register number is used for the stack pointer (sp) in OS/161?
+Ans: 29 -/os161-ASST0/kern/arch/mips/include/kern/regdefs.h
+
+Question 3. What bus/busses does OS/161 support?
+Ans:LAMEBus -/os161-ASST0/kern/arch/sys161/include/bus.h
+
+Question 4. What is the difference between splhigh and spl0?
+Ans:
+spl -set priority level
+splhigh -set max priority and disable all the interrupts
+spl0 -set min priority level and enable all interrupts
+/os161-ASST0/kern/include/spl.h
+
+Question 5. Why do we use typedefs like u_int32_t instead of simply saying "int"?
+Ans: To get unsigned 32 bit integer
+/os161-ASST0/kern/include/types.h
+
+Question 6: What must be the first thing in the process control block?
+Ans: boot kernel
+
+Question 7. What does splx return?
+Ans: splx -Disable or enable interrupts and adjust curspl setting. Return old spl level.
+/os161-ASST0/kern/thread/spl.c
+
+Question 8. What is the highest interrupt level?
+Ans:
+
+Question 9. What function is called when user-level code generates a fatal fault?
+Ans: kill_curthread
+/os161-ASST0/kern/arch/mips/locore/trap.c
+
+Question 10. How frequently are hardclock interrupts generated?
+Ans: 100 per second, as defined in /os161-ASST0/kern/include/clock.h
+
+Question 11. What functions comprise the standard interface to a VFS device?
+Ans: typedef __i32 __pid_t;   /os161-ASST0/kern/include/kern/types.h
+
+Question 12. How many characters are allowed in a volume name?
+Ans: Defined as SFS_VOLNAME_SIZE  32 in /os161-ASST0/kern/include/kern/sfs.h
+
+Question 13. How many direct blocks does an SFS file have?
+Ans: Defined as SFS_NDIRECT 15 in /os161-ASST0/kern/include/kern/sfs.h
+
+Question 14. What is the standard interface to a file system (i.e., what functions must you implement
+to implement a new file system)?
+Ans:
+fsop_sync       -Flush all dirty buffers to disk.
+fsop_getvolname -Return volume name of filesystem.
+fsop_getroot    -Return root vnode of filesystem.
+fsop_unmount    -Attempt unmount of filesystem.
+in /os161-ASST0/kern/include/fs.h
+
+Question 15. What function puts a thread to sleep?
+Ans: The static fuction thread_switch(threadstate_t newstate,
+struct wchan *wc, struct spinlock *lk) puts a thread to sleep when
+called with newstate parameter equal to S_SLEEP, this function
+also calls wchan_sleep function. dened in kern/thread/thread.c
+
+Question 16. How large are OS/161 pids?
+Ans:
+
+Question 17. What operations can you do on a vnode?
+Ans: Functions such as,
+*vop_reclaim -when vnode is of no use
+*vop_read -read file to uio
+*vop_write -write file to uio at offset
+and others in /os161-ASST0/kern/include/vnode.h
+
+Question 18. What is the maximum path length in OS/161?
+Ans: Defined as __PATH_MAX 1024 in /os161-ASST0/kern/include/kern/limits.h
+
+Question 19. What is the system call number for a reboot?
+Ans: Defined as SYS_reboot 119 in /os161-ASST0/kern/include/kern/syscall.h
+
+Question 20. Where is STDIN_FILENO defined?
+Ans: Defined as STDIN_FILENO  0 in /os161-ASST0/kern/include/kern/unistd.h
+
+Question 21. What does kmain() do?
+Ans: Boot up, then fork the menu thread; wait for a reboot request, and then shut down
+as in /os161-ASST0/kern/main/main.c
+
+Question 22. Is it OK to initialise the thread system before the scheduler? Why (not)?
+Ans: Yes, the scheduler bootstrap just create the run queue and the thread bootstrap just initialises the first thread
+
+Question 23. Whatis a zombie?
+Ans: Threads that have exited but still need to have thread_destroy
+called on them for cleanup are referred to as 'zombie'.
+/os161-ASST0/kern/thread/thread.c
+
+Question 24. How large is the initial run queue?
+Ans: runqueue = q_create(32)  from kern/thread/scheduler.c
+
+Question 25. What does a device name in OS/161 look like?
+Ans: The name of a device is always just "device:". The VFS layer puts in the device name for us. Found in /kern/vfs/device.c, line 281
+
+Question 26. What does a raw device name in OS/161 look like?
+Ans: kd_rawname -Name of raw device (eg, "lhd0raw"). Is non-NULL if andonly if this device can have a filesystem mounted on it.
+/os161-ASST0/kern/vfs/vfslist.c
+
+Question 27. What lock protects the vnode reference count?
+Ans: vn_countlock
+/os161-ASST0/kern/vfs/vnode.c
+
+Question 28. What device types are currently supported?
+Ans: Block devices and character devices.
+* For block devices, require block alignment.
+* For character devices, we should prohibit seeking entirely, but
+* for the moment we need to accept any position. (XXX)
+-/os161-ASST0/kern/vfs/device.h

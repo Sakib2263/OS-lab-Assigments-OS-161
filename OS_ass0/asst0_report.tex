@@ -1,0 +1,79 @@
+\documentclass[11pt, english]{article}
+\usepackage[utf8]{inputenc} %packages
+\usepackage[T1]{fontenc}
+\usepackage{babel}
+%opening
+\title{CSE3211: Operating System Assignment 0} %title of the report
+% author name: you and your partner
+\author{Sakib Hasan\\
+	 Roll : 149
+	\and
+Afia Anjum\\
+Roll: 09
+}
+\date{July 23, 2019} %change date as requires
+\begin{document}
+\maketitle
+\section{Introduction}
+\textit{ Question 1 .  What is the vm system called that is configured for assignment 0?  }\newline
+\textbf{Answer: dumbvm}\\ \\
+\textit{ Question 2 .  Which register number is used for the stack pointer (sp) in OS/161?  }\newline
+\textbf{Answer: 29}\\ \\
+\textit{ Question 3 .  What bus/busses does OS/161 support?  }\newline
+\textbf{Answer: The only bus supported is LAMEbus}\\ \\
+\textit{ Question 4 .  What is the difference between splhigh and spl0?  }\newline
+\textbf{Answer: spl0() sets priority level to 0, enabling all interrupts. splhigh() sets prority to the highest value, disabling all interrupts.}\\ \\
+\textit{ Question 5 .  Why do we use typedefs like u\_int32\_t instead of simply saying "int"?  }\newline
+\textbf{Answer: we use  u\_int32\_t to get a 32-bit unsigned integer . Unsigned int is platform dependent, so it is not declared "int".}\\ \\
+\textit{ Question 6 .  What must be the first thing in the process control block?  }\newline
+\textbf{Answer: }\\ \\
+\textit{ Question 7 .  What does splx return?  }\newline
+\textbf{Answer: splx returns old spl level}\\ \\
+\textit{ Question 8 .  What is the highest interrupt level?  }\newline
+\textbf{Answer: Highest interrupt level is 1 }\\ \\
+\textit{ Question 9 .  What function is called when user-level code generates a fatal fault?  }\newline
+\textbf{Answer: kill\_curthread() is called which is a static function defined in  kern/arch/mips/locore/trap.c}\\ \\
+\textit{ Question 10 .  How frequently are hardclock interrupts generated?  }\newline
+\textbf{Answer: 100 hardclocks are generated per second. It is defined as HZ in kern/include/clock.h}\\ \\
+\textit{ Question 11 .  What functions comprise the standard interface to a VFS device?  }\newline
+\textbf{Answer:  devop\_eachopen, devop\_io, devop\_ioctl defined in kern/include/device.h}\\ \\
+\textit{ Question 12 .  How many characters are allowed in a volume name?  }\newline
+\textbf{Answer: 32 characters. It is defined as SFS\_VOLNAME\_SIZE in kern/include/kern/sfs.h}\\ \\
+\textit{ Question 13 .  How many direct blocks does an SFS file have?  }\newline
+\textbf{Answer: 15. It is defined as SFS\_NDIRECT in kern/include/kern/sfs.h}\\ \\
+\textit{ Question 14 .  What is the standard interface to a file system i. e., what functions must you
+implement to implement a new file system)? }\newline
+\textbf{Answer: The functions are - 1. fsop\_sync - flush all dirty buffers to disk, 2. fsop\_getvolname - return volume name of filesystem, 3. fsop\_getroot -  return root vnode of filesystem and 4. fsop\_unmount - attempt unmount of filesystem}\\ \\
+\textit{ Question 15 .  What function puts a thread to sleep?  }\newline
+\textbf{Answer: The static fuction thread\_switch(threadstate\_t newstate, struct wchan *wc, struct spinlock *lk) puts a thread to sleep when called with newstate parameter equal to S\_SLEEP, this function also calls wchan\_sleep function.   defined in kern/thread/thread.c }\\ \\
+\textit{ Question 16 .  How large are OS/161 pids?  }\newline
+\textbf{Answer: 32 bits, defined as \_\_pid\_t in kern/include/kern/types.h }\\ \\ \\
+\textit{ Question 17 .  What operations can you do on a vnode?  }\newline
+\textbf{Answer: The operations are eachopen, reclaim, read, readlink, getdirentry, write, ioctl, stat, gettype, fsync, mmap, truncate, namefile, create, symlink, mkdir, link, remove, rmdir, rename, lookup, lookparent.}\\ \\
+\textit{ Question 18 .  What is the maximum path length in OS/161?  }\newline
+\textbf{Answer: 1024 bytes. It is defined  in kern/include/kern/limits.h}\\ \\
+\textit{ Question 19 .  What is the system call number for a reboot?  }\newline
+\textbf{Answer: System call number is  119, defined as SYS\_reboot in /kern/include/kern/syscall.h}\\ \\
+\textit{ Question 20 .  Where is STDIN\_FILENO defined?  }\newline
+\textbf{Answer: kern/include/kern/unistd.h}\\ \\
+\textit{ Question 21 .  What does kmain() do?  }\newline
+\textbf{Answer: kmain() functions purpose is- 1. boot up , 2. fork the menu thread, 3. wait for a reboot request and finally 4.shut down. As part of the assignment, complex\_hello function call is placed inside this function.}\\ \\
+\textit{ Question 22 .  Is it OK to initialize the thread system before the scheduler? Why (not)? }\newline
+\textbf{Answer: Yes . Scheduler creates current CPU's run queue by job priority so initializing thread system before the scheduler is all right.}\\ \\
+\textit{ Question 23 .  What is a zombie? }\newline
+\textbf{Answer: Threads that have exited but still need to have thread\_destroy called on them for cleanup are referred to as 'zombie'.}\\ \\
+\textit{ Question 24 . How large is the initial run queue? }\newline
+\textbf{Answer:  runqueue = q\_create(32) -- from kern/thread/scheduler.c  }\\ \\
+\textit{ Question 25 .  What does a device name in OS/161 look like? }\newline
+\textbf{Answer: The name of a device is always just "device:". The VFS layer puts in the device name for us.  Found in /kern/vfs/device.c, line 281}\\ \\
+\textit{ Question 26 .  What does a raw device name in OS/161 look like? }\newline
+\textbf{Answer: Raw device name have "raw" concatenated after the name (eg, "lhd0raw")}\\ \\
+\textit{ Question 27 .  What lock protects the vnode reference count? }\newline
+\textbf{Answer: vn\_countlock.}\\ \\
+\textit{ Question 28 .  What device types are currently supported?  }\newline
+\textbf{Answer: Block devices and character devices.}\\ \\
+
+
+\section{conclusion}
+Some of the files are not available in the given os161 source code, so we have not been able to find answers to question 6 and 24.
+\end{document}
